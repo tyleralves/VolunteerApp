@@ -39,7 +39,7 @@ NOW:
 
 StartUp:
 cd C:\program files\mongodb\server\3.2\bin
-mongod --dbpath C:\Users\Tyler\WebstormProjects\volunteer\volunteerApp\data
+mongod --dbpath C:\Users\Tyler\WebstormProjects\volunteerApp\data
 
 
 
