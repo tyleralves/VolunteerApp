@@ -1,0 +1,16 @@
+<div class="row" id="bodyDiv" data-controller="userlist" data-action="user.role">
+    <div class="col-md-12">
+        <h1>Userlist</h1>
+        <ul>
+            {{#userlist}}
+                <li>{{username}}    {{email}}</li>
+            {{/userlist}}
+
+        </ul>
+        <ul>
+            {{#volunteerlist}}
+                <li>{{username}} -- {{password}} -- {{email}}</li>
+            {{/volunteerlist}}
+        </ul>
+    </div>
+</div>

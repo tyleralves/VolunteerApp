@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row" id="bodyDiv" data-controller="dashboard" data-action="{{user.role}}">
+        <div class="col-md-12">
+            <h2>Welcome {{user.displayname}}</h2>
+            <h5>Update profile information, view messages, add a picture, and more</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>This is how other users will see your profile:</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4><a href="/userprofile/{{user.username}}">{{user.displayname}}</a></h4>
+                            <strong>Description:</strong>
+                            <span>{{user.description}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/userprofile/{{user.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{user.profileimg}}" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default nomargin-panel">
+                <div class="activateDiv panel-heading">
+                    <h4>Update Profile Information:</h4>
+                </div>
+                <div class="panel-body initialHidden">
+                    <form action="/updateuser" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label for="displayname">Display Name:</label>
+                            <input type="text" class="form-control" id="displayname" name="displayname" value="{{user.displayname}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="about">Description of Organization:</label>
+                            <textarea id="about" class="form-control" name="about">{{user.description}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileImgUpload">Profile Picture:</label>
+                            <input type="file" id="profileImgUpload" name="upl" />
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 orgDiv">
+            <div class="panel panel-default nomargin-panel">
+                <div class="activateDiv panel-heading">
+                    <h4>Add a New Volunteer Opportunity</h4>
+                </div>
+                <div class="panel-body initialHidden">
+                    <form action="/addjob" method="post" id="addJobForm">
+                        <div class="form-group">
+                            <label for="inputOrganization">Organization: </label><br />
+                            <input type="text" class="form-control" id="inputOrganization" name="joborganization" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTitle">Job Title: </label><br />
+                            <input type="text" class="form-control" id="inputTitle" name="jobtitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Please provide a brief description of the volunteer opportunity: </label>
+                            <textarea id="inputDescription" class="form-control" name="jobdescription"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

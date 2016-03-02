@@ -1,0 +1,167 @@
+
+<div class="jumbotron index_jumbo">
+
+</div>
+<div class="container">
+    <div class="page-header">
+        <h2 class="jumbo_h1">
+            Welcome to VolunteerApp!
+        </h2>
+        <h4 class="jumbo_h4">Helping enthusiastic volunteers connect with capable organizations across the globe.</h4>
+
+    </div>
+</div>
+<a href="#bodyDiv"><span class="glyphicon glyphicon-chevron-down" id="jumbo_down"></span></a>
+
+<div class="container" id="bodyDiv" data-controller="index" data-action="{{user.role}}">
+    <div class="row">
+        <div class="col-md-11 carousel-header-col">
+            <div class="newestOrgsHeader">
+                <h2>Newest Organizations</h2>
+            </div>
+        </div>
+        <div class="col-md-1 slide-controls-col">
+            <div class="slide-controls">
+                <a data-slide="prev" href="#newestCarousel" class="left"><span class="glyphicon glyphicon-chevron-left carousel_control"></span></a>
+                <a data-slide="next" href="#newestCarousel" class="right"><span class="glyphicon glyphicon-chevron-right carousel_control"></span></a>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <!--Newest organizations carousel-->
+                <div id="newestCarousel" class="carousel slide" data-type="multi">
+
+                    <!--Wrapper for slides-->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-md-4">
+                                <div class="item-dim">
+                                    <div class="carousel-caption">
+                                        <a href="/userprofile/{{orgsfeatured.0.username}}">{{orgsfeatured.0.description}}</a>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <a href="/userprofile/{{orgsfeatured.0.username}}">
+                                            <img class="img-responsive host-featured-img" src="/uploads/{{orgsfeatured.0.profileimg}}" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {{#iterate orgsfeatured startCount="1"}}
+                            <div class="item">
+                                <div class="col-md-4">
+                                    <div class="item-dim">
+                                        <div class="carousel-caption">
+                                            <a href="/userprofile/{{this.username}}">{{this.description}}</a>
+                                        </div>
+                                        <div class="thumbnail">
+                                            <a href="/userprofile/{{this.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{this.profileimg}}" /></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        {{/iterate}}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-11 carousel-header-col">
+            <div class="newestOrgsHeader">
+                <h2>Recent Feedback</h2>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <!--Newest organizations carousel-->
+
+                {{#iterate orgsfeatured startCount="1" endCount='4'}}
+                    <div class="item">
+                        <div class="col-md-4">
+                            <div class="item-dim">
+                                <blockquote>{{this.description}}</blockquote>
+                                <a href="/userprofile/{{this.username}}">{{this.datecreated}}</a>
+                            </div>
+
+                        </div>
+                    </div>
+                {{/iterate}}
+
+            </div>
+
+        </div>
+    </div>
+        <!--Top row side panel containing fast-facts/ motto/ statistics-->
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Bulletin Board</h2>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default nomargin">
+                    <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Connecting People</h4>
+                        </div>
+                    </a>
+
+                    <div class="panel-collapse collapse" id="collapseOne">
+                        <div class="panel-body">
+                            <p>VolunteerApp allows volunteers to search through volunteer opportunities posted by organizations
+                                around the world. Volunteer organizations can search through the database of volunteers to find those people with the skills
+                                they need!</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default nomargin">
+                    <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">No Fees, No Problem!</h4>
+                        </div>
+                    </a>
+                    <div class="panel-collapse collapse" id="collapseTwo">
+                        <div class="panel-body">
+                            <p>VolunteerApp believes that volunteers should not need to pay in order to donate their time and effort
+                                to a good cause. In fact, one of the reasons that VA was formed was to cut out the middlemen, who often charge exorbitant amounts
+                                to setup volunteers in positions of need.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default nomargin">
+                    <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Example Statement Here!</h4>
+                        </div>
+                    </a>
+                    <div class="panel-collapse collapse" id="collapseThree">
+                        <div class="panel-body">
+                            <p>An example statement will go here explaining the different ways to join the VolunteerApp website.
+                                It will talk about being a volunteer versus being an organization looking for helping hands.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+</div>

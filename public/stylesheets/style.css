@@ -1,0 +1,265 @@
+html, body {
+    height: 100%;
+}
+
+html{
+    overflow-y: scroll;
+}
+
+.panel>a {
+    text-decoration: none;
+    color: black;
+}
+
+.heading-div{
+    margin-bottom: 50px;
+}
+
+
+input,textarea {
+    margin-bottom: 10px;
+}
+
+textarea{
+    height:200px;
+    width:100%;
+}
+
+.jobItemStyle {
+    margin-top: 10px;
+    border-bottom: 1px solid lightblue;
+    padding-bottom: 10px;
+}
+
+.jobItemStyle:nth-of-type(1){
+    /*margin-top: 0;*/
+}
+
+.jobItemImg {
+    margin: 10px 10px;
+}
+
+.pageContent {
+    margin-top: 40px;
+}
+
+.nav {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.navbar {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.navList {
+    list-style-position: inside;
+    padding-left: 0;
+    margin:0;
+}
+
+/*Global classes*/
+.initialHidden {
+    display: none;
+}
+
+.initialHiddenNav {
+    visibility: hidden;
+}
+
+/*Main Page: host-featured section*/
+.index_jumbo {
+    display: block;
+    position: relative;
+    background: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+}
+
+.index_jumbo::after {
+    content: "";
+    background: #FFF url("/uploads/jumbotron_image.jpg") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.page-header {
+    position: absolute;
+    top: 50%;
+    border-bottom: hidden;
+    margin-top: 0;
+}
+
+.page-header>h2 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    font-weight: 400;
+    margin-top: 0;
+}
+
+.page-header>h4 {
+    color: beige;
+    font-weight: 400;
+}
+
+#jumbo_down{
+    position: absolute;
+    top: 95%;
+    right: 50%;
+    font-size: 2em;
+    color: white;
+}
+
+#jumbo_down:hover{
+    color: rgba(255,255,255,.8);
+}
+
+/*Newest Orgs Carousel*/
+
+.carousel-header-col, .slide-controls-col {
+    height: 50px;
+}
+
+.newestOrgsHeader h2{
+    position: absolute;
+    display: inline-block;
+    bottom: 10px;
+    margin-bottom: 0;
+}
+
+.slide-controls{
+    position: absolute;
+    display: inline-block;
+    bottom: 10px;
+    right: 15px;
+}
+
+@media screen and (max-width: 992px) {
+    .newestOrgsHeader h2 {
+        position: static;
+        text-align: center;
+        width: 100%;
+    }
+
+    .slide-controls {
+        position: static;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .carousel-inner > .item.next,
+    .carousel-inner > .item.active.right {
+        left: 0;
+        -webkit-transform: translate3d(33%, 0, 0);
+        transform: translate3d(33%, 0, 0);
+    }
+    .carousel-inner > .item.prev,
+    .carousel-inner > .item.active.left {
+        left: 0;
+        -webkit-transform: translate3d(-33%, 0, 0);
+        transform: translate3d(-33%, 0, 0);
+    }
+}
+
+.left, .right {
+    background-image: none;
+    font-weight: 400;
+    color: black;
+}
+
+.carousel_control:hover{
+    color: rgba(0,0,0,.7);
+}
+
+.left:visited, .right:visited {
+    color: black;
+}
+
+.carousel-inner img {
+    object-fit: cover;
+}
+
+/* Utility Classes */
+.nopadding{
+    padding:0;
+}
+.nomargin {
+    margin: 0;
+}
+
+div{
+    display:block;
+}
+
+/*newuser page*/
+
+.nomargin-panel{
+    margin: 0;
+}
+
+.panel-heading>.register-panel-heading>h4{
+    display: inline-block;
+    margin: 0 0;
+    padding: 0;
+    padding-left:20px;
+    vertical-align: middle;
+
+}
+
+.panel-heading>.register-panel-heading:hover{
+    background: white;
+    opacity:.5;
+    margin: 0;
+    padding: 0;
+    height:100%;
+    width:100%;
+}
+
+/* ==============================Profile page===============================================================*/
+/*Initially hide role-specific divs, then show with client-app.js based on user role*/
+.orgDiv {
+    display: none;
+}
+
+.volDiv {
+    display: none;
+}
+
+/*==============================Orglist page================================================================*/
+.orglist-row{
+    border-bottom: 1px solid lightblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.orglist-row:first-of-type{
+    border-top: 1px solid lightblue;
+}
+
+/*==============================Messages================================================================*/
+.messageDiv{
+    border-bottom: 1px solid lightblue;
+}
+
+.messageDiv:last-of-type,
+.messageDiv:first-of-type{
+    border-bottom: none;
+}
+
+.user-featured-image {
+    height: 65px;
+    width: 65px;
+    overflow-y: hidden;
+}

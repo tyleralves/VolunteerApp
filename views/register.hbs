@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row" id="bodyDiv" data-controller="register" data-action="{{user.role}}">
+        <div class="col-md-12">
+            <h2>Get Involved</h2>
+            <h5>Join the growing community of volunteers</h5>
+            <span class="text-danger">{{message}}</span>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default nomargin-panel">
+                <div class="activateDivRegister panel-heading">
+                    <div class="register-panel-heading">
+                        <h4>I am joining VolunteerApp as a volunteer</h4></div>
+                </div>
+                <div class="panel-body">
+                    <form id="formAddVol" role="form" action="/register" method="post">
+                        <div class="form-group">
+                            <label for="inputVolUsername">Username:</label>
+                            <input type="text" class="form-control" id="inputVolUsername" placeholder="Enter Username" name="username" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputVolPassword">Password:</label>
+                            <input type="password" class="form-control" id="inputVolPassword" placeholder="Enter Password" name="password" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputVolEmail">Email:</label>
+                            <input type="text" class="form-control" id="inputVolEmail" placeholder="Enter Email" name="useremail" required/>
+                        </div>
+                        <input type="hidden" name="userrole" value="volunteer"/>
+                        <button class="btn btn-default" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="activateDivRegister panel-heading">
+                    <div class="register-panel-heading">
+                        <h4>I am joining VolunteerApp as an organization</h4>
+                    </div>
+                </div>
+                <div class="initialHidden panel-body">
+                    <form id="formAddOrg" role="form" action="/register" method="post">
+                        <div class="form-group">
+                            <label for="inputOrgUsername">Username:</label>
+                            <input type="text" class="form-control" id="inputOrgUsername" placeholder="Enter Username" name="username" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputOrgPassword">Password:</label>
+                            <input type="password" class="form-control" id="inputOrgPassword" placeholder="Enter Password" name="password" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputOrgEmail">Email:</label>
+                            <input type="text" class="form-control" id="inputOrgEmail" placeholder="Enter Email" name="useremail" required/>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label><input type="checkbox" name="options[]" value="smoker"/>Smoking allowed</label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label><input type="checkbox" name="options[]" value="pets"/>Pets allowed</label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label><input type="checkbox" name="options[]" value="families" />Suitable for families</label>
+                        </div>
+                        <input type="hidden" name="userrole" value="organization" />
+                        <button class="btn btn-default" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row" id="bodyDiv" data-controller="register" data-action="{{user.role}}">
+
+        <div class="col-md-12">
+            <h2>Login</h2>
+            <h5>View and edit account details, messages and feedback</h5>
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-default guestDiv">
+                <div class="panel-heading">
+                    <h4>Login:</h4>
+                </div>
+                <div class="panel-body">
+                    <form action="/login" role="form" method="post">
+                        <div class="form-group">
+                            <label class="control-label" for="loginUser">Username:</label>
+                            <input type="text" class="form-control" name="username" id="loginUser" placeholder="Username" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="loginPass">Password:</label>
+                            <input type="password" class="form-control" name="password" id="loginPass" placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+
+                    </form>
+                    <span class="text-danger">{{message}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

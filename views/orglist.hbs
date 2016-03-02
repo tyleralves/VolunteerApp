@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row" id="bodyDiv" data-controller="orglist" data-action="{{user.role}}" data-currentPage="{{currentPage}}" data-totalPages="{{totalPages}}">
+        <div class="col-md-12"> <!--Change class to add side column-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Organization List</h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form id="formSearchOrglist" role="form" action="/orglist" method="get">
+                                <div class="form-group">
+                                    <label for="inputSearchKeyword">Keyword:</label>
+                                    <input class="form-control" id="inputSearchKeyword" name="keyword" placeholder="ie: Sea turtle study" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputSearchLocation">Location:</label>
+                                    <input class="form-control" id="inputSearchLocation" name="location" placeholder="Enter search location" />
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="searchOptionSmoking" value="smoker"/>Smoking allowed</label>
+                                    <label><input type="checkbox" name="searchOptionFamilies" value="families">Suitable for families</label>
+                                    <label><input type="checkbox" name="searchOptionPets" value="pets">Pets allowed</label>
+                                </div>
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    {{#orglist}}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h4><a href="/userprofile/{{username}}">{{displayname}}</a></h4>
+                                        <strong>Description:</strong>
+                                        <span>{{description}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="/userprofile/{{username}}"><img class="img-responsive host-featured-img" src="/uploads/{{profileimg}}" /></a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {{/orglist}}
+                    <div class="text-center">
+                        <ul class="pagination">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

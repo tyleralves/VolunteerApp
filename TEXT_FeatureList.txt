@@ -1,0 +1,46 @@
+Databases(2):
+    1. Users
+        a. Volunteers:
+            - Dashboard
+                + User Profile Page
+                + Favorite postings
+                + Private Messaging
+        b. Organizations
+            - Dashboard
+                + Org Profile Page
+                + Post Position Access (Ties into Job Listings db)
+                + Private Messaging
+    2. Job Listings
+        Views:
+            - Add job
+            - Display Positions (search results)
+                + Search Capabilities
+
+
+NOW:
+    1. Build out userprofile.hbs
+
+    2. Dashboard (each component is a panel)
+        + Universal Components
+            - Instant Message
+            - Update profile information
+            - My images
+                *Image upload
+                    + Up to 5 images
+                    + all user images combined must be less than 10 mb
+
+        + Organization Components
+            -"Add Job" component
+        +Volunteer Components
+    3. IMPORTANT: Image Cropper
+    4. Messages
+    5. Feedback
+
+
+StartUp:
+cd C:\program files\mongodb\server\3.2\bin
+mongod --dbpath C:\Users\Tyler\WebstormProjects\volunteer\volunteerApp\data
+
+
+
+

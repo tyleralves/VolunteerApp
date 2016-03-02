@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row" id="bodyDiv" data-controller="dashboard" data-action="{{user.role}}">
+        <div class="col-md-12">
+            <h2>{{userDetails.displayname}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <strong>Description:</strong>
+                            <span>{{userDetails.description}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{userDetails.profileimg}}" /></a>
+                            <a href="/messages?username={{userDetails.username}}"><div class="btn btn-default orgDiv volDiv">Message</div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
