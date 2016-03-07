@@ -237,6 +237,16 @@ div{
     display: none;
 }
 
+.profileBtn:first-of-type {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.profileBtn:last-of-type {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 /*==============================Orglist page================================================================*/
 .orglist-row{
     border-bottom: 1px solid lightblue;

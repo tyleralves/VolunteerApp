@@ -18,8 +18,10 @@ Databases(2):
 
 
 NOW:
-    1. Build out userprofile.hbs
-
+    1. Profile
+        + Feedback score
+        + Feedback
+        + User images
     2. Dashboard (each component is a panel)
         + Universal Components
             - Instant Message
@@ -34,12 +36,15 @@ NOW:
         +Volunteer Components
     3. IMPORTANT: Image Cropper
     4. Messages
+        + make profile image dynamic, changes made by user affects image in messages
+        + Document limit per page, and PAGINATION
     5. Feedback
 
 
 StartUp:
 cd C:\program files\mongodb\server\3.2\bin
 mongod --dbpath C:\Users\Tyler\WebstormProjects\volunteerApp\data
+mongo ds019668.mlab.com:19668/heroku_67dwl1k0 -u <dbuser> -p <dbpassword>
 
 
 

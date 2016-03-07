@@ -196,6 +196,32 @@ VOLUNTEERAPP = {
             //profile user(organization) specific code
 
         }
+    },
+    feedback: {
+        init: function(){
+            //profile onload code
+            //Activate nav item? Add if necessary
+
+            //Show message form if user has been selected
+            if(document.location.href.indexOf('id=')>0){
+                $('.sendMessage.initialHidden').css('display','block');
+            }
+
+            //Handlebars template adds class 'activateDiv' to first message from each user to enable slideToggle in 'common' property(above)
+
+            $('.btn-reply').on('click',function(){
+                $(this).parent().siblings().css('display','none');
+            })
+
+        },
+        volunteer: function(){
+            //profile user(volunteer) specific code
+
+        },
+        organization: function(){
+            //profile user(organization) specific code
+
+        }
     }
 };
 

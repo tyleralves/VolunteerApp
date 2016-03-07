@@ -15,9 +15,9 @@ var userSchema = new mongoose.Schema({
     //Optional General Properties
     displayname: String,
     description: String,
-    feedback: Array,
     messagein: Array,
-    messageout: Array,
+    feedbacksent_ids: [{type:mongoose.Schema.Types.ObjectId, ref: 'Feedback'}],
+    feedbackreceived_ids: [{type:mongoose.Schema.Types.ObjectId, ref: 'Feedback'}],
     //Organization specific properties
     location: String,
     options: Array

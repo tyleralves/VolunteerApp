@@ -3,8 +3,12 @@ var router = express.Router();
 var passport = require('passport');
 var path = require('path');
 var User = require('../models/user');
+var Feedback = require('../models/feedback');
 var multer = require('multer');
 var app = require('../app');
+var mongoose = require('mongoose');
+var Promise = require('bluebird');
+Promise.promisifyAll(mongoose);
 //var readChunk = require('read-chunk');                for magic bytes implementation
 //var fileType = require('file-type');                  for magic bytes implementation
 
@@ -76,13 +80,21 @@ router.get('/orglist', function (req, res, next) {
 
 //Organization Profile
 router.get('/userprofile/:username', function (req, res, next) {
-    User.findOne({username: req.params.username}, function (err, docs) {
-        var detailsObjString = "<script type='text/javascript'>";
-        detailsObjString += "var detailsObjString = " + JSON.stringify(docs) + ";";
-        detailsObjString += "</script>";
-        res.render('userprofile.hbs', {user: req.user, userDetails: docs, detailsObjString: detailsObjString});
-    });
+    User.findOne({username: req.params.username})
+        .populate({path: 'feedbackreceived_ids', options: {sort: {datecreated: -1}}})
+        .exec(function (err, docs) {
+
+            Feedback.populate(docs, {path: 'feedbackreceived_ids.sender_id', select: 'username displayname profileimg', model: 'User'}, function (err, updatedDocs) {
+                console.log("====================" + JSON.stringify(updatedDocs.feedbackreceived_ids[0].sender_id));
+                res.render('userprofile.hbs', {
+                    user: req.user,
+                    userDetails: updatedDocs,
+                    message: req.flash('message')
+                });
+            })
+        })
 });
+
 
 //User List
 router.get('/userlist', function (req, res, next) {
@@ -245,6 +257,41 @@ router.route('/messages')
         next();
     }, function(req,res,next){
         res.redirect(req.url + '?username=' + req.body.messageUser + '&originatingTitle=' + req.body.originatingTitle);
+    });
+
+
+//Feedback
+//TODO: Order message strings to be displayed in order of newest message
+router.route('/feedback')
+    .get(isAuthenticated, function(req,res,next){    //Note: feedback.hbs relies on 'replyUser' and 'messages' handlebars helpers defined at the top of index.js
+        User.findOne({_id:req.query.id}, function(err,docs){
+            if(err){
+                console.log("error!!");
+            }
+
+            res.render('feedback.hbs', {
+                user: req.user, query: req.query, receivingUser:docs
+            });
+        });
+    })
+    .post(function(req,res,next){
+        var newFeedback = {
+            _id: mongoose.Types.ObjectId(),
+            sender_id: req.user._id,
+            content: req.body.messageContent,
+            datecreated: new Date()
+        };
+
+        Feedback.create(newFeedback);
+        User.findByIdAndUpdate(req.user._id, {$push:{feedbacksent_ids: newFeedback._id}},{upsert:true}, function(err,docs){
+            console.log("=================", docs);
+        });
+        User.findByIdAndUpdate(req.body.feedbackid, {$push:{feedbackreceived_ids: newFeedback._id}},{upsert:true}, function(err,docs){
+            console.log("=================", newFeedback._id);
+        });
+        next();
+    }, function(req,res,next){
+        res.redirect(req.url + '?id=' + req.body.feedbackid/* + '&originatingTitle=' + req.body.originatingTitle*/);
     });
 
 //Jobs============================================================================================================

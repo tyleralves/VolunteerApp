@@ -55,6 +55,8 @@ module.exports = function(passport){
                                     newUser.profileimg = 'defaultuserimage.png';
                                     newUser.datecreated = new Date();
                                     newUser.messagein = [];
+                                    newUser.feedbackreceived_ids = [];
+                                    newUser.feedbacksent_ids = [];
                                     //newUser.firstName = req.body.firstname;
                                     //newUser.lastName = req.body.lastname;
 

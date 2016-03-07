@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row" id="bodyDiv" data-controller="feedback" data-action="{{user.role}}" data-currentPage="{{currentPage}}" data-totalPages="{{totalPages}}">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Messages</h2>
+                    <h5>View and send messages</h5>
+                </div>
+            </div>
+            <div class="row sendMessage initialHidden">
+                <div class="col-md-8">
+                    <strong>Leave feedback for {{receivingUser.displayname}}</strong>
+                    <form action="/feedback" method="post" id="addJobForm">
+                        <input type="text" value="{{query.id}}" class="form-control hidden" id="feedbackid" name="feedbackid"/>
+                        <input type="text" value="{{query.originatingTitle}}" class="form-control hidden" id="originatingTitle" name="originatingTitle" />
+                        <div class="form-group">
+                            <label for="messageContent">Feedback: </label>
+                            <textarea id="messageContent" class="form-control" name="messageContent"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-responsive user-featured-image" src="/uploads/{{receivingUser.profileimg}}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    {{#messages user.messagein}}
+                        <div class="panel panel-default" data-originatingtitle="{{originatingTitle}}">
+                            <div class="panel-heading">
+                                <h4>{{originatingTitle}}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <a href="/userprofile/{{senderUser}}"><img class="img-responsive user-featured-image" src="/uploads/{{senderImage}}" /></a>
+
+                                    </div>
+                                    <div class="col-md-11">
+                                        <div><strong>{{senderDisplay}} - {{title}}</strong></div>
+                                        <div>{{content}}</div>
+
+                                        {{#replyUser senderUser ../user.username}}
+                                            <a href="messages?username={{../recipientUser}}&originatingTitle={{originatingTitle}}"><div class="btn btn-default btn-reply">Reply</div></a>
+                                        {{else}}
+                                            <a href="messages?username={{../senderUser}}&originatingTitle={{originatingTitle}}"><div class="btn btn-default btn-reply">Reply</div></a>
+                                        {{/replyUser}}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer {{@index}}" data-originatingtitle="{{originatingTitle}}">View/hide messages in this string...</div>
+                    {{else}}
+                            <div class="panel-body messageDiv {{@index}}" data-originatingtitle="{{originatingTitle}}">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <a href="/userprofile/{{senderUser}}"><img class="img-responsive user-featured-image" src="/uploads/{{senderImage}}" /></a>
+
+                                    </div>
+                                    <div class="col-md-11">
+                                        <strong>{{senderDisplay}} - {{originatingTitle}}</strong>
+                                        <div>{{content}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                    {{/messages}}
+                    <div class="text-center">
+                        <ul class="pagination">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
