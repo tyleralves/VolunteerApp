@@ -4,6 +4,7 @@ var passport = require('passport');
 var path = require('path');
 var User = require('../models/user');
 var Feedback = require('../models/feedback');
+var Message = require('../models/message');
 var multer = require('multer');
 var app = require('../app');
 var mongoose = require('mongoose');
@@ -85,7 +86,7 @@ router.get('/userprofile/:username', function (req, res, next) {
         .exec(function (err, docs) {
 
             Feedback.populate(docs, {path: 'feedbackreceived_ids.sender_id', select: 'username displayname profileimg', model: 'User'}, function (err, updatedDocs) {
-                console.log("====================" + JSON.stringify(updatedDocs.feedbackreceived_ids[0].sender_id));
+                //console.log("====================" + JSON.stringify(updatedDocs.feedbackreceived_ids[0].sender_id));
                 res.render('userprofile.hbs', {
                     user: req.user,
                     userDetails: updatedDocs,
@@ -181,25 +182,29 @@ router.post('/updateuser',
 );
 
 //Messages
-//TODO: Order message strings to be displayed in order of newest message
 router.route('/messages')
     .get(isAuthenticated, function(req,res,next){    //Note: messages.hbs relies on 'replyUser' and 'messages' handlebars helpers defined at the top of index.js
-        User.findOne({username:req.query.username}, function(err,docs){
+        User.findOne({username:req.query.username}, function(err,recipientDocs){
             if(err){
-                console.log("error!!");
+                console.log("error in GET: /messages");
             }
-            res.render('messages.hbs', {
-                user: req.user, query: req.query, receivingUser:docs
-            });
+            User.findById(req.user._id)
+                .populate({path:'message_ids', options: {sort: {datecreated: -1}}})
+                .exec(function(err,userDocs){
+                    Message.populate(userDocs,{path:'message_ids.sender_id', select:'username displayname profileimg', model:'User'},function(err, updatedUserDocs){
+                        res.render('messages.hbs', {
+                            user: updatedUserDocs, query: req.query, receivingUser:recipientDocs
+                        });
+                    })
+                });
         });
     })
     .post(function(req,res,next){
         var messageStringTitle = typeof req.body.originatingTitle !== 'undefined'&&req.body.originatingTitle !== ''?req.body.originatingTitle:req.body.messageTitle;    //checks to see if query parameter defined for originating title, if not sets message title to originating title (starts new message string)
         
         var newMessage = {
-            senderDisplay: req.user.displayname,
-            senderUser: req.user.username,
-            senderImage: req.user.profileimg,         //need to update to dynamic sender image, currently it will use the sender image at the time the message is sent
+            _id: mongoose.Types.ObjectId(),
+            sender_id: req.user._id,
             recipientUser: req.body.messageUser,
             originatingTitle: messageStringTitle,
             title: req.body.messageTitle,
@@ -207,61 +212,23 @@ router.route('/messages')
             dateCreated: new Date()
         };
 
-        var messageSender = function(docs){
-            var tempMessageArray = docs.messagein;
+        if(typeof req.body.originatingTitle === 'undefined' || req.body.originatingTitle === ''){
+            newMessage.originatingId = Math.floor(Math.random()*10e6);
+        }else{
+            newMessage.originatingId = req.body.originatingId;
+        }
 
-            //Iterate through all message strings in messagein property of docs document
-            for(var i = 0; i<tempMessageArray.length; i++){
-                //IF the originating title of the first message within the existing message string (and thus all others in string) are the originating title of the new message AND
-                //either the sender OR recipient of the existing message string are the sender of the new message AND
-                //either the sender OR recipient of the existing message string are the recipient of the new message THEN
-                //the new message belongs to the existing message string at this iteration of the messagein property
-                if(tempMessageArray[i][0].originatingTitle===messageStringTitle&&(tempMessageArray[i][0].senderUser===newMessage.senderUser||tempMessageArray[i][0].recipientUser===newMessage.senderUser)&&(tempMessageArray[i][0].senderUser===newMessage.recipientUser||tempMessageArray[i][0].recipientUser===newMessage.recipientUser)){
-                    var existingMessageIndex = i;
-                    break;
-                }
-            }
-
-            if(typeof existingMessageIndex === 'undefined'){    //IF the above algorithm did not find that the new message belongs to an existing message string, it is added as a new message string array
-                tempMessageArray.unshift([newMessage]);
-                docs.messagein = tempMessageArray;
-            }else{
-                docs.messagein[existingMessageIndex].unshift(newMessage);    //ELSE the new message is added to the existing message string to which is belongs
-            }
-            return docs;
-        };
-
-
-        //Update sending user
-        User.findOne({username: req.user.username}, function(e, docs){
-            messageSender(docs);
-            docs.markModified('messagein');
-            docs.save(function(e){
-                if(e){
-                    console.log("Error saving outgoing message");
-                }
-            })
-        });
-
-        //Update receiving user
-        User.findOne({username: req.body.messageUser}, function(e, docs){
-            messageSender(docs);
-            docs.markModified('messagein');
-            docs.save(function(e){
-                if(e){
-                    console.log("Error sending message within post ('/messages')");
-                }
-            });
-        });
+        Message.create(newMessage);
+        console.log("======================" + req.body.messageUser);
+        User.update({$or:[{'username': req.body.messageUser},{_id:req.user._id}]}, {$push:{message_ids: newMessage._id}}, {upsert:true, multi:true}, function(err,docs){});
 
         next();
     }, function(req,res,next){
-        res.redirect(req.url + '?username=' + req.body.messageUser + '&originatingTitle=' + req.body.originatingTitle);
+        res.redirect(req.url + '?username=' + req.body.messageUser + '&originatingTitle=' + req.body.originatingTitle + '&originatingId=' + req.body.originatingId);
     });
 
 
 //Feedback
-//TODO: Order message strings to be displayed in order of newest message
 router.route('/feedback')
     .get(isAuthenticated, function(req,res,next){    //Note: feedback.hbs relies on 'replyUser' and 'messages' handlebars helpers defined at the top of index.js
         User.findOne({_id:req.query.id}, function(err,docs){

@@ -20,6 +20,8 @@ Helpers = {
             return ret;
         });
 
+
+
         hbs.registerHelper('replyUser', function(sender,activeUser,options){
             if(sender === activeUser){
                 return options.fn(this);
@@ -40,30 +42,25 @@ Helpers = {
 
             context = context.toObject();
             context.sort(function(a,b){
-                return b[0].dateCreated - a[0].dateCreated;
+                return b.dateCreated - a.dateCreated || b.originatingId - a.originatingId;
             });
             for(var i = 0; i<context.length; i++) {
-                for(var j = 0; j<context[i].length; j++){
-                    if (data){
-                        if(j===0){
-                            data.index = "activateDiv";
-                            if(context[i].length===1){
-                                ret = ret + options.fn(context[i][j], {data: data}) + "</div>";
-                            }else{
-                                ret = ret + options.fn(context[i][j], {data: data});
-                            }
-                        }else if(j===context[i].length-1){
-                            data.index = "initialHidden";
-                            ret = ret + options.inverse(context[i][j], {data: data}) + "</div>";
+                if (data){
+                    if(typeof context[i-1] === 'undefined' || context[i].originatingId !== context[i-1].originatingId){
+                        data.index = "activateDiv";
+                        if(typeof context[i+1] === 'undefined' || context[i].originatingId !== context[i+1].originatingId){
+                            ret = ret + options.fn(context[i], {data: data}) + "</div>";
                         }else{
-                            data.index = "initialHidden";
-                            ret = ret + options.inverse(context[i][j], {data: data});
+                            ret = ret + options.fn(context[i], {data: data});
                         }
-
+                    }else if(i===context.length-1 || context[i].originatingId !== context[i+1].originatingId){
+                        data.index = "initialHidden";
+                        ret = ret + options.inverse(context[i], {data: data}) + "</div>";
+                    }else{
+                        data.index = "initialHidden";
+                        ret = ret + options.inverse(context[i], {data: data});
                     }
-
                 }
-
             }
             return ret;
         });

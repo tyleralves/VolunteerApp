@@ -13,6 +13,7 @@
                     <form action="/messages" method="post" id="addJobForm">
                         <input type="text" value="{{query.username}}" class="form-control hidden" id="messageUser" name="messageUser"/>
                         <input type="text" value="{{query.originatingTitle}}" class="form-control hidden" id="originatingTitle" name="originatingTitle" />
+                        <input type="text" value="{{query.originatingId}}" class="form-control hidden" id="originatingId" name="originatingId" />
                         <div class="form-group">
                             <label for="messageTitle">Title: </label><br />
                             <input type="text" class="form-control" id="messageTitle" name="messageTitle" />
@@ -32,46 +33,50 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    {{#messages user.messagein}}
-                        <div class="panel panel-default" data-originatingtitle="{{originatingTitle}}">
-                            <div class="panel-heading">
-                                <h4>{{originatingTitle}}</h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <a href="/userprofile/{{senderUser}}"><img class="img-responsive user-featured-image" src="/uploads/{{senderImage}}" /></a>
 
-                                    </div>
-                                    <div class="col-md-11">
-                                        <div><strong>{{senderDisplay}} - {{title}}</strong></div>
-                                        <div>{{content}}</div>
 
-                                        {{#replyUser senderUser ../user.username}}
-                                            <a href="messages?username={{../recipientUser}}&originatingTitle={{originatingTitle}}"><div class="btn btn-default btn-reply">Reply</div></a>
-                                        {{else}}
-                                            <a href="messages?username={{../senderUser}}&originatingTitle={{originatingTitle}}"><div class="btn btn-default btn-reply">Reply</div></a>
-                                        {{/replyUser}}
 
-                                    </div>
+                    {{#messages user.message_ids}}
+                    <div class="panel panel-default" data-originatingtitle="{{originatingTitle}}">
+                        <div class="panel-heading">
+                            <h4>{{originatingTitle}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <a href="/userprofile/{{sender_id.username}}"><img class="img-responsive user-featured-image" src="/uploads/{{sender_id.profileimg}}" /></a>
+
+                                </div>
+                                <div class="col-md-11">
+                                    <div><strong>{{sender_id.displayname}} - {{title}}</strong></div>
+                                    <div>{{content}}</div>
+
+                                    {{#replyUser sender_id.username ../user.username}}
+                                        <a href="messages?username={{../recipientUser}}&originatingTitle={{originatingTitle}}&originatingId={{originatingId}}"><div class="btn btn-default btn-reply">Reply</div></a>
+                                    {{else}}
+                                        <a href="messages?username={{../sender_id.username}}&originatingTitle={{originatingTitle}}&originatingId={{originatingId}}"><div class="btn btn-default btn-reply">Reply</div></a>
+                                    {{/replyUser}}
+
                                 </div>
                             </div>
-                            <div class="panel-footer {{@index}}" data-originatingtitle="{{originatingTitle}}">View/hide messages in this string...</div>
+                        </div>
+                        <div class="panel-footer {{@index}}" data-originatingtitle="{{originatingTitle}}">View/hide messages in this string...</div>
                     {{else}}
-                            <div class="panel-body messageDiv {{@index}}" data-originatingtitle="{{originatingTitle}}">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <a href="/userprofile/{{senderUser}}"><img class="img-responsive user-featured-image" src="/uploads/{{senderImage}}" /></a>
+                        <div class="panel-body messageDiv {{@index}}" data-originatingtitle="{{originatingTitle}}">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <a href="/userprofile/{{sender_id.username}}"><img class="img-responsive user-featured-image" src="/uploads/{{sender_id.profileimg}}" /></a>
 
-                                    </div>
-                                    <div class="col-md-11">
-                                        <strong>{{senderDisplay}} - {{originatingTitle}}</strong>
-                                        <div>{{content}}</div>
-                                    </div>
+                                </div>
+                                <div class="col-md-11">
+                                    <strong>{{sender_id.displayname}} - {{originatingTitle}}</strong>
+                                    <div>{{content}}</div>
                                 </div>
                             </div>
+                        </div>
 
                     {{/messages}}
+
                     <div class="text-center">
                         <ul class="pagination">
 

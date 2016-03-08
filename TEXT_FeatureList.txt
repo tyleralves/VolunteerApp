@@ -24,7 +24,7 @@ NOW:
         + User images
     2. Dashboard (each component is a panel)
         + Universal Components
-            - Instant Message
+            - Private Messages
             - Update profile information
             - My images
                 *Image upload
@@ -45,7 +45,3 @@ StartUp:
 cd C:\program files\mongodb\server\3.2\bin
 mongod --dbpath C:\Users\Tyler\WebstormProjects\volunteerApp\data
 mongo ds019668.mlab.com:19668/heroku_67dwl1k0 -u <dbuser> -p <dbpassword>
-
-
-
-
