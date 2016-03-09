@@ -237,6 +237,15 @@ div{
     display: none;
 }
 
+.preUserInput {
+    white-space: pre-wrap;
+    word-break: normal;
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 .profileBtn:first-of-type {
     margin-right: 0;
     padding-right: 0;

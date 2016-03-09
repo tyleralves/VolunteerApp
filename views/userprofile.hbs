@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h4>Description:</h4>
-                            <span>{{userDetails.description}}</span>
+                            <span><pre class="preUserInput">{{userDetails.description}}</pre></span>
                         </div>
                         <div class="col-md-4">
                             <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{userDetails.profileimg}}" /></a>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-11">
                                 <div><strong>{{sender_id.displayname}}</strong></div>
-                                <div>{{content}}</div>
+                                <div><pre class="preUserInput">{{content}}</pre></div>
 
                             </div>
                         </div>

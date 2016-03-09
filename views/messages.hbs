@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-md-11">
                                     <div><strong>{{sender_id.displayname}} - {{title}}</strong></div>
-                                    <div>{{content}}</div>
+                                    <div><pre class="preUserInput">{{content}}</pre></div>
 
                                     {{#replyUser sender_id.username ../user.username}}
                                         <a href="messages?username={{../recipientUser}}&originatingTitle={{originatingTitle}}&originatingId={{originatingId}}"><div class="btn btn-default btn-reply">Reply</div></a>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-md-11">
                                     <strong>{{sender_id.displayname}} - {{originatingTitle}}</strong>
-                                    <div>{{content}}</div>
+                                    <div><pre class="preUserInput">{{content}}</pre></div>
                                 </div>
                             </div>
                         </div>

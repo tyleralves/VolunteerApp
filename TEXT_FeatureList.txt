@@ -42,6 +42,14 @@ NOW:
 
 
 StartUp:
+Mongo Executables:
 cd C:\program files\mongodb\server\3.2\bin
+
+Local mongo server (now using MongoLab database):
 mongod --dbpath C:\Users\Tyler\WebstormProjects\volunteerApp\data
+
+Access MongoLab mongoDB terminal:
 mongo ds019668.mlab.com:19668/heroku_67dwl1k0 -u <dbuser> -p <dbpassword>
+
+Update Heroku:
+git push heroku master
