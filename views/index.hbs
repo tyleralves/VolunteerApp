@@ -100,8 +100,13 @@
                 {{#feedbackfeatured}}
                     <div class="col-md-4">
                         <div class="item-dim">
-                            <blockquote>{{this.content}}</blockquote>
-                            <a href="/userprofile/{{this.recipient_id.username}}">{{this.recipient_id.username}}</a>
+                            <blockquote>
+                                <p>{{this.content}}</p>
+                                <footer>
+                                    <a href="/userprofile/{{this.recipient_id.username}}">{{this.recipient_id.username}}</a>
+                                </footer>
+                            </blockquote>
+
                         </div>
                     </div>
                 {{/feedbackfeatured}}
