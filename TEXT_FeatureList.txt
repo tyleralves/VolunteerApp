@@ -32,6 +32,11 @@ NOW:
     4. Messages
         + Document limit per page, and PAGINATION
     5. Feedback
+    6. General
+        + Prevent users from doing certain actions to their own account
+            - leaving feedback
+            - sending messages?
+        + Prevent same user from leaving feedback multiple times to another user
 
 
 StartUp:

@@ -313,15 +313,16 @@ div{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+@media screen and (min-width: 992px) {
+    .profileBtn:first-of-type {
+        margin-right: 0;
+        padding-right: 0;
+    }
 
-.profileBtn:first-of-type {
-    margin-right: 0;
-    padding-right: 0;
-}
-
-.profileBtn:last-of-type {
-    margin-left: 0;
-    padding-left: 0;
+    .profileBtn:last-of-type {
+        margin-left: 0;
+        padding-left: 0;
+    }
 }
 
 /*==============================Orglist page================================================================*/
@@ -346,7 +347,5 @@ div{
 }
 
 .user-featured-image {
-    height: 65px;
-    width: 65px;
     overflow-y: hidden;
 }

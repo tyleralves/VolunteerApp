@@ -18,7 +18,7 @@
                             <span><pre class="preUserInput">{{userDetails.description}}</pre></span>
                         </div>
                         <div class="col-md-4">
-                            <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{userDetails.profileimg}}" /></a>
+                            <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive" src="/uploads/{{userDetails.profileimg}}" /></a>
                             <div class="row">
                                 <div class="col-md-6 profileBtn">
                                     <a href="/messages?username={{userDetails.username}}"><div class="btn btn-default orgDiv volDiv">Send Message</div></a>
@@ -85,11 +85,11 @@
 
                     {{#userDetails.feedbackreceived_ids}}
                         <div class="row feedbackItem">
-                            <div class="col-md-1">
+                            <div class="col-xs-2 feedbackImgCol">
                                 <a href="/userprofile/{{sender_id.username}}"><img class="img-responsive user-featured-image" src="/uploads/{{sender_id.profileimg}}" /></a>
 
                             </div>
-                            <div class="col-md-11">
+                            <div class="col-xs-10 feedbackContentCol">
                                 <div>
                                     <p>By: <a href="/userprofile/{{sender_id.username}}">{{sender_id.displayname}}</a></p>
 
