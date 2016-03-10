@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row" id="bodyDiv" data-controller="dashboard" data-action="{{user.role}}">
+    <div class="row" id="bodyDiv" data-controller="profile" data-action="{{user.role}}">
         <div class="col-md-12">
             <h2>{{userDetails.displayname}}</h2>
         </div>
@@ -57,19 +57,53 @@
                     <h4>Feedback</h4>
                 </div>
                 <div class="panel-body initialHidden">
+                    {{#if userDetails.feedbackreceived_ids}}
+                        <p>Feedback for <strong>{{userDetails.displayname}}</strong></p>
+                    {{else}}
+                        <p>{{userDetails.displayname}} has not yet received any feedback.</p>
+                    {{/if}}
+
+                    <div class="row sendMessage initialHidden">
+                        <div class="col-md-8">
+                            <form action="/feedback" method="post" id="addJobForm">
+                                <input type="text" value="{{userDetails._id}}" class="form-control hidden" id="feedbackid" name="feedbackid"/>
+                                <input type="text" value="{{userDetails.username}}" class="form-control hidden" id="feedbackuser" name="feedbackuser"/>
+                                <input type="text" value="{{query.originatingTitle}}" class="form-control hidden" id="originatingTitle" name="originatingTitle" />
+                                <div class="form-group">
+                                    <label for="messageContent">Feedback: </label>
+                                    <textarea id="messageContent" class="form-control" name="messageContent"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-responsive user-featured-image" src="/uploads/{{user.profileimg}}" />
+                        </div>
+                    </div>
+
+
                     {{#userDetails.feedbackreceived_ids}}
-                        <div class="row">
+                        <div class="row feedbackItem">
                             <div class="col-md-1">
                                 <a href="/userprofile/{{sender_id.username}}"><img class="img-responsive user-featured-image" src="/uploads/{{sender_id.profileimg}}" /></a>
 
                             </div>
                             <div class="col-md-11">
-                                <div><strong>{{sender_id.displayname}}</strong></div>
+                                <div>
+                                    <p>By: <a href="/userprofile/{{sender_id.username}}">{{sender_id.displayname}}</a></p>
+
+                                </div>
                                 <div><pre class="preUserInput">{{content}}</pre></div>
 
                             </div>
                         </div>
                     {{/userDetails.feedbackreceived_ids}}
+                    <div class="orgDiv volDiv">
+                        <div class="btn btn-default btn-enableFeedback">
+                            <p>Leave feedback for {{userDetails.displayname}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

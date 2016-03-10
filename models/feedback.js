@@ -7,6 +7,7 @@ var mongoosePaginate = require("mongoose-paginate");
 var feedbackSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     sender_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    recipient_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     datecreated: Date,
     content: String
     }

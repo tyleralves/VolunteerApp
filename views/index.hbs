@@ -14,7 +14,7 @@
 <a href="#bodyDiv"><span class="glyphicon glyphicon-chevron-down" id="jumbo_down"></span></a>
 
 <div class="container" id="bodyDiv" data-controller="index" data-action="{{user.role}}">
-    <div class="row">
+    <div class="row header-row">
         <div class="col-md-11 carousel-header-col">
             <div class="newestOrgsHeader">
                 <h2>Newest Organizations</h2>
@@ -39,10 +39,14 @@
                         <div class="item active">
                             <div class="col-md-4">
                                 <div class="item-dim">
-                                    <div class="carousel-caption">
-                                        <a href="/userprofile/{{orgsfeatured.0.username}}">{{orgsfeatured.0.description}}</a>
-                                    </div>
-                                    <div class="thumbnail">
+                                    <a href="/userprofile/{{orgsfeatured.0.username}}">
+                                        <div class="carousel-caption customCaption">
+                                            <h4>{{orgsfeatured.0.displayname}}</h4>
+                                            <p  class="initialHidden">{{orgsfeatured.0.description}}</p>
+                                            <div class="btn btn-success initialHidden">Learn More</div>
+                                        </div>
+                                    </a>
+                                    <div class="thumbnail nopadding nomargin noborder">
                                         <a href="/userprofile/{{orgsfeatured.0.username}}">
                                             <img class="img-responsive host-featured-img" src="/uploads/{{orgsfeatured.0.profileimg}}" />
                                         </a>
@@ -56,10 +60,14 @@
                             <div class="item">
                                 <div class="col-md-4">
                                     <div class="item-dim">
-                                        <div class="carousel-caption">
-                                            <a href="/userprofile/{{this.username}}">{{this.description}}</a>
-                                        </div>
-                                        <div class="thumbnail">
+                                        <a href="/userprofile/{{this.username}}">
+                                            <div class="carousel-caption customCaption">
+                                                <h4>{{this.displayname}}</h4>
+                                                <p class=initialHidden>{{this.description}}</p>
+                                                <div class="btn btn-success initialHidden">Learn More</div>
+                                            </div>
+                                        </a>
+                                        <div class="thumbnail nopadding nomargin noborder">
                                             <a href="/userprofile/{{this.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{this.profileimg}}" /></a>
                                         </div>
                                     </div>
@@ -76,8 +84,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-11 carousel-header-col">
+    <div class="row header-row">
+        <div class="col-md-12 carousel-header-col">
             <div class="newestOrgsHeader">
                 <h2>Recent Feedback</h2>
             </div>
@@ -89,24 +97,21 @@
             <div class="row">
                 <!--Newest organizations carousel-->
 
-                {{#iterate orgsfeatured startCount="1" endCount='4'}}
-                    <div class="item">
-                        <div class="col-md-4">
-                            <div class="item-dim">
-                                <blockquote>{{this.description}}</blockquote>
-                                <a href="/userprofile/{{this.username}}">{{this.datecreated}}</a>
-                            </div>
-
+                {{#feedbackfeatured}}
+                    <div class="col-md-4">
+                        <div class="item-dim">
+                            <blockquote>{{this.content}}</blockquote>
+                            <a href="/userprofile/{{this.recipient_id.username}}">{{this.recipient_id.username}}</a>
                         </div>
                     </div>
-                {{/iterate}}
+                {{/feedbackfeatured}}
 
             </div>
 
         </div>
     </div>
         <!--Top row side panel containing fast-facts/ motto/ statistics-->
-    <div class="row">
+    <div class="row header-row">
         <div class="col-md-12">
             <h2>Bulletin Board</h2>
             <div class="panel-group" id="accordion">

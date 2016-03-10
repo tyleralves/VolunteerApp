@@ -8,35 +8,28 @@ Databases(2):
         b. Organizations
             - Dashboard
                 + Org Profile Page
-                + Post Position Access (Ties into Job Listings db)
                 + Private Messaging
-    2. Job Listings
-        Views:
-            - Add job
-            - Display Positions (search results)
-                + Search Capabilities
+    2. Messages
+    3. Feedback
 
 
 NOW:
-    1. Profile
+    1. Index
+        + Make description snippet more readable in newest organizations slider
+        + Display feedback in slider
+    2. Profile
         + Feedback score
         + Feedback
-        + User images
-    2. Dashboard (each component is a panel)
+        + User Images
+    3. Dashboard (each component is a panel)
         + Universal Components
             - Private Messages
-            - Update profile information
             - My images
                 *Image upload
                     + Up to 5 images
                     + all user images combined must be less than 10 mb
-
-        + Organization Components
-            -"Add Job" component
-        +Volunteer Components
-    3. IMPORTANT: Image Cropper
+                    + crop to same size
     4. Messages
-        + make profile image dynamic, changes made by user affects image in messages
         + Document limit per page, and PAGINATION
     5. Feedback
 

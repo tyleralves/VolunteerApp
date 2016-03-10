@@ -161,6 +161,11 @@ VOLUNTEERAPP = {
             //profile onload code
             //Activate nav item
             $('#navItemProfile').addClass('active');
+
+            //Toggle feedback form
+            $('.btn-enableFeedback').on('click', function(){
+                $('.sendMessage').css('display','block');
+            });
         },
         volunteer: function(){
             //profile user(volunteer) specific code

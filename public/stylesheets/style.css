@@ -6,8 +6,15 @@ html{
     overflow-y: scroll;
 }
 
-.panel>a {
+a {
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.panel>a {
     color: black;
 }
 
@@ -130,6 +137,10 @@ textarea{
     height: 50px;
 }
 
+.header-row {
+    margin-top: 0px;
+}
+
 .newestOrgsHeader h2{
     position: absolute;
     display: inline-block;
@@ -191,12 +202,55 @@ textarea{
     object-fit: cover;
 }
 
+.customCaption {
+    background: rgba(0,0,0,.7);
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-top: 0;
+    padding-left: 15px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: left;
+    overflow: hidden;
+    height: 50px;
+    line-height: 25px;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+
+.customCaption>a{
+    color: white;
+
+}
+
+.item-dim:hover .customCaption {
+    top: 0;
+    height: auto;
+}
+
+.item-dim:hover .customCaption>a{
+    text-decoration: none;
+}
+
+.item-dim:hover .customCaption>p, .item-dim:hover .customCaption>.btn {
+    display: inline-block;
+}
+
+
 /* Utility Classes */
 .nopadding{
     padding:0;
 }
 .nomargin {
     margin: 0;
+}
+
+.noborder {
+    border: none;
 }
 
 div{
@@ -237,13 +291,27 @@ div{
     display: none;
 }
 
+.btn-enableFeedback{
+    display: inline-block;
+}
+
+.btn-enableFeedbackLabel {
+    white-space: nowrap;
+}
+
 .preUserInput {
+    font: inherit;
     white-space: pre-wrap;
     word-break: normal;
     background: none;
     margin: 0;
     padding: 0;
     border: none;
+}
+
+.feedbackItem {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .profileBtn:first-of-type {

@@ -28,15 +28,21 @@ hbsHelpers.registerAllHelpers();                       //Registering all hbs hel
 //Homepage
 router.get('/', function (req, res, next) {
     //Fetching data to populate newest listings collage
-    User.find({role: 'organization'}).sort({datecreated: -1}).limit(6).exec(function (err, docs) {
-            docs.forEach(function(item){
-                item.description = item.description.slice(0,40);
-                item.description += "...";
+    User.find({role: 'organization'}).sort({datecreated: -1}).limit(6).exec(function (err, orgsDocs) {
+        orgsDocs = orgsDocs.map(function (item) {
+            item.description = item.description.slice(0, 280) + '...';
+            return item;
+        });
+        console.log(orgsDocs);
+        Feedback.find({}).sort({datecreated: -1}).limit(3).populate('recipient_id','username').exec(function (err, feedbackDocs) {
+            feedbackDocs = feedbackDocs.map(function (feedback) {
+                feedback.content = feedback.content.slice(0, 280) + '...';
+                return feedback;
             });
+            res.render('index.hbs', {user: req.user, orgsfeatured: orgsDocs, feedbackfeatured: feedbackDocs, message: req.flash('message'),auth: req.flash('auth')});
+        });
+    });
 
-            res.render('index.hbs', {user: req.user, orgsfeatured: docs, message: req.flash('message'),auth: req.flash('auth')})
-        }
-    );
 });
 
 //Organization List
@@ -245,6 +251,7 @@ router.route('/feedback')
         var newFeedback = {
             _id: mongoose.Types.ObjectId(),
             sender_id: req.user._id,
+            recipient_id: req.body.feedbackid,
             content: req.body.messageContent,
             datecreated: new Date()
         };
@@ -258,7 +265,7 @@ router.route('/feedback')
         });
         next();
     }, function(req,res,next){
-        res.redirect(req.url + '?id=' + req.body.feedbackid/* + '&originatingTitle=' + req.body.originatingTitle*/);
+        res.redirect('/userprofile/' + req.body.feedbackuser/* + '&originatingTitle=' + req.body.originatingTitle*/);
     });
 
 //Jobs============================================================================================================
