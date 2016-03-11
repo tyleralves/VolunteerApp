@@ -43,6 +43,14 @@ VOLUNTEERAPP = {
                 interval: 5000
             });
 
+
+            var scrollPos = $(window).scrollTop;
+            alert(scrollPos);
+            $(window).scroll(function(){
+                $('#logoImg').animate({height: '75px'},2000);
+                //Reduce menu item paddings here
+            });
+
             //Displays multi-item or single-item carousel depending on window width
             var carouselMulti = false;
             var carouselType = function(){

@@ -30,13 +30,19 @@ router.get('/', function (req, res, next) {
     //Fetching data to populate newest listings collage
     User.find({role: 'organization'}).sort({datecreated: -1}).limit(6).exec(function (err, orgsDocs) {
         orgsDocs = orgsDocs.map(function (item) {
-            item.description = item.description.slice(0, 280) + '...';
+            item.description = item.description.slice(0, 280);
+            if(item.description.length===280){
+                item.description = item.description + '...';;
+            }
             return item;
         });
         console.log(orgsDocs);
-        Feedback.find({}).sort({datecreated: -1}).limit(3).populate('recipient_id','username').exec(function (err, feedbackDocs) {
+        Feedback.find({}).sort({datecreated: -1}).limit(3).populate('recipient_id','username displayname').exec(function (err, feedbackDocs) {
             feedbackDocs = feedbackDocs.map(function (feedback) {
-                feedback.content = feedback.content.slice(0, 280) + '...';
+                feedback.content = feedback.content.slice(0, 280);
+                if(feedback.content.length===280){
+                    feedback.content = feedback.content + '...';;
+                }
                 return feedback;
             });
             res.render('index.hbs', {user: req.user, orgsfeatured: orgsDocs, feedbackfeatured: feedbackDocs, message: req.flash('message'),auth: req.flash('auth')});

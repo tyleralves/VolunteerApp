@@ -15,8 +15,8 @@
 
 <div class="container" id="bodyDiv" data-controller="index" data-action="{{user.role}}">
     <div class="row header-row">
-        <div class="col-md-11 carousel-header-col">
-            <div class="newestOrgsHeader">
+        <div class="col-md-11 indexSectionHeader-col">
+            <div class="indexSectionHeader">
                 <h2>Newest Organizations</h2>
             </div>
         </div>
@@ -85,8 +85,8 @@
     </div>
 
     <div class="row header-row">
-        <div class="col-md-12 carousel-header-col">
-            <div class="newestOrgsHeader">
+        <div class="col-md-12 indexSectionHeader-col">
+            <div class="indexSectionHeader">
                 <h2>Recent Feedback</h2>
             </div>
         </div>
@@ -94,31 +94,51 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
-                <!--Newest organizations carousel-->
 
+
+            <svg class="feedbackSVG" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <filter id="shadow">
+                        <feGaussianBlur in='SourceAlpha' stdDeviation='2.5' result='blur' />
+                        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .35 0" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in='blur'/>
+                            <feMergeNode in='SourceGraphic'/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+
+
+
+                    <polygon points="0,0 100,0 100,90 8,90 4,100 5,90 0,90" vector-effect="non-scaling-stroke" fill="none" stroke="black" stroke-width=".5px"></polygon>
+                    <!--<rect width="100%" height="260px"/>
+                    <path d="M 10 260 l 30 0 -30 31 z"/>-->
+
+
+
+            </svg>
+            <div class="feedbackDiv" height="300px">
                 {{#feedbackfeatured}}
-                    <div class="col-md-4">
-                        <div class="item-dim">
-                            <blockquote>
-                                <p>{{this.content}}</p>
-                                <footer>
-                                    <a href="/userprofile/{{this.recipient_id.username}}">{{this.recipient_id.username}}</a>
-                                </footer>
-                            </blockquote>
-
-                        </div>
+                    <div class="feedbackItem">
+                        <p>{{this.content}}</p>
+                        <a href="/userprofile/{{this.recipient_id.username}}">- {{this.recipient_id.displayname}}</a>
                     </div>
                 {{/feedbackfeatured}}
-
             </div>
 
         </div>
     </div>
         <!--Top row side panel containing fast-facts/ motto/ statistics-->
     <div class="row header-row">
+        <div class="col-md-12 indexSectionHeader-col">
+            <div class="indexSectionHeader">
+                <h2>Bulletin Board</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
-            <h2>Bulletin Board</h2>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default nomargin">
                     <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
@@ -166,12 +186,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
-
-
-
 </div>
