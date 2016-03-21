@@ -30,6 +30,7 @@ a:hover {
 #bodyDiv-anchor {
     display: block;
     position: relative;
+    top: -60px;
 }
 
 
