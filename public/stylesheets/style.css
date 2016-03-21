@@ -78,7 +78,6 @@ textarea{
     background: none;
     height: 50px;
     line-height: 50px;
-    padding:0 10px;
     margin:0;
 }
 
@@ -97,6 +96,7 @@ textarea{
     height:3px;
     background: darkblue;
     z-index: 1;
+    margin: 0 10px;
 }
 
 
