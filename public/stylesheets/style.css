@@ -8,6 +8,7 @@ html{
 
 .templateContent {
     height: 100%;
+    margin-top: 111px;
 }
 
 a {
@@ -29,7 +30,7 @@ a:hover {
 #bodyDiv-anchor {
     display: block;
     position: relative;
-    top: -169px;
+    top: -90px;
 }
 
 
@@ -61,7 +62,7 @@ textarea{
 }
 
 #logoImg {
-    height: 30px;
+    height: 60px;
 }
 
 .nav {
@@ -150,7 +151,7 @@ textarea{
 
 .index_jumbo::after {
     content: "";
-    background: #FFF url("/uploads/jumbotron_image.jpg") no-repeat center;
+    background: #FFF url("/uploads/jumbotron_image.jpg") no-repeat;
     background-size: cover;
     position: absolute;
     top: 0;
@@ -336,6 +337,10 @@ textarea{
 
     .templateContent {
         margin-top: 219px;
+    }
+
+    #bodyDiv-anchor {
+    top: -185px;
     }
 }
 

@@ -31,11 +31,13 @@ VOLUNTEERAPP = {
                             $('#logoImg').animate({height: '60px'}, 200);
                             $('.nav li>a').css({height: '50px', lineHeight: '50px'});
                             $('.templateContent').animate({'margin-top': '120px'}, 200);
+                            $('#bodyDiv-anchor').css({top: '-90px'});
                             initialLogoSize = false;
                         } else if (!initialLogoSize && scrollPos < 50) {
                             $('#logoImg').animate({height: '119px'}, 200);
                             $('.nav li>a').css({height: '100px', lineHeight: '100px'});
                             $('.templateContent').animate({'margin-top': '219px'}, 200);
+                            $('#bodyDiv-anchor').css({top: '-185px'});
                             initialLogoSize = true;
                         }
                     });
