@@ -30,7 +30,6 @@ a:hover {
 #bodyDiv-anchor {
     display: block;
     position: relative;
-    top: -60px;
 }
 
 
@@ -74,15 +73,7 @@ textarea{
 
 }
 
-.nav li {
-    position: relative;
-    display: inline-block;
-    /*border: 1px solid black;*/
-}
-
 .nav li>a{
-    position: relative;
-    display: inline-block;
     color: black;
     background: none;
     height: 50px;
@@ -131,12 +122,6 @@ textarea{
 
 .navbarCustom {
     background: white;
-}
-
-.navList {
-    list-style-position: inside;
-    padding-left: 0;
-    margin:0;
 }
 
 /*Global classes*/
