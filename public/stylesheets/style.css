@@ -8,7 +8,7 @@ html{
 
 .templateContent {
     height: 100%;
-    margin-top: 111px;
+    margin-top: 60px;
 }
 
 a {
@@ -30,7 +30,6 @@ a:hover {
 #bodyDiv-anchor {
     display: block;
     position: relative;
-    top: -90px;
 }
 
 
@@ -91,7 +90,7 @@ textarea{
     margin:0;
 }
 
-.nav li>a:hover {
+.nav li>a:hover, .nav li>a:active {
     background: none;
 }
 
@@ -103,7 +102,6 @@ textarea{
     right: 5px;
     bottom:-1px;
     width: auto;
-
     height:3px;
     background: darkblue;
     z-index: 1;
@@ -114,6 +112,16 @@ textarea{
     width: 100%;
     margin-bottom: 0;
     box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+
+.navbar-toggle {
+    position: absolute;
+    top: -50px;
+    right: 50px;
+}
+
+.icon-bar {
+    background: black;
 }
 
 .navbar-nav {
@@ -210,14 +218,14 @@ textarea{
 .indexSectionHeader h2{
     position: absolute;
     display: inline-block;
-    bottom: 0px;
+    bottom: 0;
     margin-bottom: 0;
 }
 
 .slide-controls{
     position: absolute;
     display: inline-block;
-    bottom: 0px;
+    bottom: 0;
     right: 15px;
 }
 
@@ -360,19 +368,16 @@ div{
     display:block;
 }
 
-/*newuser page*/
-
+/* ==============================Registration page===============================================================*/
 .nomargin-panel{
     margin: 0;
 }
 
 .panel-heading>.register-panel-heading>h4{
     display: inline-block;
-    margin: 0 0;
-    padding: 0;
-    padding-left:20px;
+    margin: 0;
+    padding: 0 0 0 20px;
     vertical-align: middle;
-
 }
 
 .panel-heading>.register-panel-heading:hover{
