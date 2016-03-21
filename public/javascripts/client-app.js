@@ -6,13 +6,41 @@ VOLUNTEERAPP = {
     common: {//Common code
         init: function() {
             //Sitewide user nonspecific code
-            //Slideout panels
-            var activateDiv = $(".activateDiv");
+            var slideoutPanels = function(){
+                var activateDiv = $(".activateDiv");
 
-            $(activateDiv).on("click", function () {  //Must have one open to begin
-                var slidingDiv = $(this).siblings('.initialHidden');
-                slidingDiv.slideToggle(500);
-            });
+                $(activateDiv).on("click", function () {  //Must have one open to begin
+                    var slidingDiv = $(this).siblings('.initialHidden');
+                    slidingDiv.slideToggle(500);
+                });
+            }();
+
+            //Removes active class from previous menu item
+            $('.navbar .active').removeClass('active');
+
+            var menuResize = function(){
+                var scrolling;
+                var initialLogoSize = true;
+
+                var width = $(window).width();
+                if(width>992) {
+                    $(window).scroll(function () {
+                        var scrollPos = $(window).scrollTop();
+
+                        if (initialLogoSize && scrollPos > 50) {
+                            $('#logoImg').animate({height: '60px'}, 200);
+                            $('.nav li>a').animate({height: '50px', lineHeight: '50px'});
+                            $('.templateContent').animate({'margin-top': '120px'}, 200);
+                            initialLogoSize = false;
+                        } else if (!initialLogoSize && scrollPos < 50) {
+                            $('#logoImg').animate({height: '119px'}, 200);
+                            $('.nav li>a').animate({height: '100px', lineHeight: '100px'});
+                            $('.templateContent').animate({'margin-top': '219px'}, 200);
+                            initialLogoSize = true;
+                        }
+                    });
+                }
+            }();
 
         },
         guest: function(){
@@ -41,14 +69,6 @@ VOLUNTEERAPP = {
             //Newest Organization Carousel
             $('#newestCarousel').carousel({
                 interval: 5000
-            });
-
-
-            var scrollPos = $(window).scrollTop;
-            alert(scrollPos);
-            $(window).scroll(function(){
-                $('#logoImg').animate({height: '75px'},2000);
-                //Reduce menu item paddings here
             });
 
             //Displays multi-item or single-item carousel depending on window width
@@ -149,11 +169,29 @@ VOLUNTEERAPP = {
 
         }
     },
+    login: {
+        init: function(){
+            //Register user nonspecific code
+            //Activate nav item
+            $('#navItemLogin').addClass('active');
+
+
+            //Sliding registration panels
+
+
+            var activateDiv = $(".activateDivRegister");
+
+            $(activateDiv).on("click", function () {  //Must have one open to begin
+                activateDiv.next().slideToggle(500);
+            });
+
+        }
+    },
     dashboard: {
         init: function(){
             //dashboard user nonspecific code
-            /*Activate nav item
-            $('#navItemDashboard').addClass('active'); //No dashboard menu item*/
+            //Activate nav item
+            $('#navItemDashboard').addClass('active');
         },
         volunteer: function(){
             //dashboard user(volunteer) specific code
@@ -168,7 +206,7 @@ VOLUNTEERAPP = {
         init: function(){
             //profile onload code
             //Activate nav item
-            $('#navItemProfile').addClass('active');
+
 
             //Toggle feedback form
             $('.btn-enableFeedback').on('click', function(){
@@ -187,6 +225,7 @@ VOLUNTEERAPP = {
     messages: {
         init: function(){
             //profile onload code
+            $('#navItemMessages').addClass('active');
             //Activate nav item? Add if necessary
 
             //Show message form if user has been selected

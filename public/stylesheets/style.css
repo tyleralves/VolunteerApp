@@ -6,6 +6,11 @@ html{
     overflow-y: scroll;
 }
 
+.templateContent {
+    height: 100%;
+    margin-top: 125px;
+}
+
 a {
     text-decoration: none;
 }
@@ -20,6 +25,12 @@ a:hover {
 
 .heading-div{
     margin-bottom: 50px;
+}
+
+#bodyDiv-anchor {
+    display: block;
+    position: relative;
+    top: -169px;
 }
 
 
@@ -51,7 +62,7 @@ textarea{
 }
 
 #logoImg {
-    height: 119px;
+    height: 30px;
 }
 
 .nav {
@@ -66,9 +77,8 @@ textarea{
 .nav li {
     position: relative;
     display: inline-block;
-    height: 100px;
-    line-height: 100px;
-    border: 1px solid black;
+    margin: 0 10px;
+    /*border: 1px solid black;*/
 }
 
 .nav li>a{
@@ -76,7 +86,8 @@ textarea{
     display: inline-block;
     color: black;
     background: none;
-    line-height: 100px;
+    height: 50px;
+    line-height: 50px;
     padding:0 10px;
     margin:0;
 }
@@ -85,7 +96,7 @@ textarea{
     background: none;
 }
 
-.nav li:hover::after {
+.nav .active::after, .nav li:hover::after {
     content: '';
     display: block;
     position: absolute;
@@ -93,13 +104,15 @@ textarea{
     bottom:-1px;
     width: 100%;
     height:3px;
-    background: lightblue;
+    background: darkblue;
     z-index: 1;
 }
+
 
 .navbar {
     width: 100%;
     margin-bottom: 0;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
 }
 
 .navbar-nav {
@@ -132,7 +145,6 @@ textarea{
     background: rgba(0,0,0,.5);
     width: 100%;
     height: 100%;
-    margin-top: 0;
     margin-bottom: 0;
 }
 
@@ -150,7 +162,7 @@ textarea{
 
 .page-header {
     position: absolute;
-    top: 50%;
+    top: 400px;
     border-bottom: hidden;
     margin-top: 0;
 }
@@ -311,6 +323,21 @@ textarea{
     display: inline-block;
 }
 
+/*Large devices menu - Animation is removed and menu is small initially*/
+@media screen and (min-width: 992px) {
+    #logoImg {
+        height: 119px;
+    }
+
+    .nav li>a {
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .templateContent {
+        margin-top: 219px;
+    }
+}
 
 /* Utility Classes */
 .nopadding{
