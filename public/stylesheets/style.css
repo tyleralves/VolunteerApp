@@ -77,7 +77,6 @@ textarea{
 .nav li {
     position: relative;
     display: inline-block;
-    margin: 0 10px;
     /*border: 1px solid black;*/
 }
 
@@ -100,9 +99,11 @@ textarea{
     content: '';
     display: block;
     position: absolute;
-    left: 0;
+    left: 5px;
+    right: 5px;
     bottom:-1px;
-    width: 100%;
+    width: auto;
+
     height:3px;
     background: darkblue;
     z-index: 1;
