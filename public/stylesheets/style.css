@@ -73,7 +73,7 @@ textarea{
 
 }
 
-.nav li>a{
+.nav li>a {
     color: black;
     background: none;
     height: 50px;
@@ -282,17 +282,15 @@ textarea{
 }
 
 .feedbackSVG {
-    padding: 2px;
+    padding: 0 30px 0 0;
     position: absolute;
     top: 0;
-    left: 15px;
     z-index: -1;
 }
 
-
-
 .feedbackDiv {
     margin: 0 15px;
+    height: 300px;
     padding-bottom: 40px;
 }
 
