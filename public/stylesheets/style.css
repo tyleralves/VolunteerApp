@@ -157,7 +157,7 @@ textarea{
 
 .page-header {
     position: absolute;
-    top: 400px;
+    top: 50%;
     border-bottom: hidden;
     margin-top: 0;
 }
