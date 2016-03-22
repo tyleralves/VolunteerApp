@@ -145,7 +145,7 @@ textarea{
 
 .index_jumbo::after {
     content: "";
-    background: #FFF url("/uploads/jumbotron_image.jpg") no-repeat;
+    background: #FFF url("/images/jumbotron_image.jpg") no-repeat;
     background-size: cover;
     position: absolute;
     top: 0;
