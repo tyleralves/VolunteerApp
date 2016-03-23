@@ -5,6 +5,10 @@
 VOLUNTEERAPP = {
     common: {//Common code
         init: function() {
+
+            tinymce.init({
+                selector: '#about'
+            });
             //Sitewide user nonspecific code
             var slideoutPanels = function(){
                 var activateDiv = $(".activateDiv");
