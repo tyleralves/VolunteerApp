@@ -176,7 +176,7 @@ router.get('/dashboard', isAuthenticated, function (req, res, next) {
 
 //Update user from within dashboard
 router.post('/addimages',
-    upload.array('userimages',12),
+    upload.array('file',12),
     function(req, res, next){
         console.log("================" + JSON.stringify(req.files));
         var imageArray = req.files;

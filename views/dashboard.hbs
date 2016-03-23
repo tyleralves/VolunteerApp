@@ -65,12 +65,8 @@
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                     <strong>Add Images</strong>
-                    <form action="/addimages" enctype="multipart/form-data" method="post">
-                        <div class="form-group">
-                            <label for="profileImgUpload">Profile Picture:</label>
-                            <input type="file" id="userImagesUpload" name="userimages" multiple/>
-                            <button type="submit" class="btn btn-default">Submit Images</button>
-                        </div>
+                    <form action="/addimages" id="userimages" class="dropzone" method="post">
+
                     </form>
                 </div>
             </div>
