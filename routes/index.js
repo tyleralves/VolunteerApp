@@ -5,6 +5,7 @@ var path = require('path');
 var User = require('../models/user');
 var Feedback = require('../models/feedback');
 var Message = require('../models/message');
+var Image = require('../models/image');
 var multer = require('multer');
 var app = require('../app');
 var mongoose = require('mongoose');
@@ -94,6 +95,7 @@ router.get('/orglist', function (req, res, next) {
 //Organization Profile
 router.get('/userprofile/:username', function (req, res, next) {
     User.findOne({username: req.params.username})
+        .populate({path: 'image_ids',options:{sort:{dateCreated:-1}}})
         .populate({path: 'feedbackreceived_ids', options: {sort: {datecreated: -1}}})
         .exec(function (err, docs) {
 
@@ -163,7 +165,9 @@ router.get('/signout', function (req, res, next) {
 
 //Dashboard
 router.get('/dashboard', isAuthenticated, function (req, res, next) {
-    User.findById(req.user.id, function (e, docs) {             //Necessary? Just use req.user instead?
+    User.findById(req.user.id)
+        .populate({path:'image_ids',options:{sort: {dateCreated:-1}}})
+        .exec(function (e, docs) {             //Necessary? Just use req.user instead?
         res.render('dashboard.hbs', {
             user: req.user, userDetails: docs
         });
@@ -171,6 +175,28 @@ router.get('/dashboard', isAuthenticated, function (req, res, next) {
 });
 
 //Update user from within dashboard
+router.post('/addimages',
+    upload.array('userimages',12),
+    function(req, res, next){
+        console.log("================" + JSON.stringify(req.files));
+        var imageArray = req.files;
+        imageArray = imageArray.map(function(currentValue,index,array){
+            currentValue._id = mongoose.Types.ObjectId();
+            currentValue.user_id = req.user.id;
+            currentValue.dateCreated = Date.now();
+            return currentValue;
+        });
+        Image.create(imageArray, function(err,images){
+                var imageIdArray = [];
+                for(var i=0; i<images.length; i++){
+                    imageIdArray.push(images[i]._id);
+                }
+                User.findByIdAndUpdate(req.user.id, {$pushAll: {image_ids:imageIdArray}},{upsert:true}, function(err, docs){
+                    res.redirect('/dashboard');
+                });
+            });
+    });
+
 router.post('/updateuser',
     upload.single('upl'),  //IMPORTANT: Need to implement magic bytes test to ensure file uploads are kosher
     function (req, res, next) {

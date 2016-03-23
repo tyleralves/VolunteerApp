@@ -11,6 +11,7 @@ var userSchema = new mongoose.Schema({
     email: String,
     role: String,
     datecreated: Date,
+    image_ids: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}],
     profileimg: String,
     //Optional General Properties
     displayname: String,

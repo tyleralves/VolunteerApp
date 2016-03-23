@@ -29,6 +29,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>User Images:</h5>
+                            {{#if userDetails.image_ids}}
+                                <div>
+                                    {{#userDetails.image_ids}}
+                                        <img class="img-responsive user-images" src="/uploads/{{filename}}"/>
+                                    {{/userDetails.image_ids}}
+                                </div>
+                            {{else}}
+                                <div>This user has not yet uploaded any images.</div>
+                            {{/if}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

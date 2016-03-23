@@ -324,6 +324,7 @@ textarea{
     .nav li>a {
         height: 100px;
         line-height: 100px;
+        padding-top: 0;
     }
 
     .templateContent {
@@ -414,6 +415,12 @@ div{
         margin-left: 0;
         padding-left: 0;
     }
+}
+
+.user-images {
+    height: 300px;
+    width: 300px;
+    display: inline-block;
 }
 
 /*==============================Orglist page================================================================*/

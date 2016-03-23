@@ -15,12 +15,26 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-8">
-                            <h4><a href="/userprofile/{{user.username}}">{{user.displayname}}</a></h4>
-                            <strong>Description:</strong>
+                            <h4>{{user.displayname}}</h4>
+                            <h5>Description:</h5>
                             <span><pre class="preUserInput">{{{user.description}}}</pre></span>
                         </div>
                         <div class="col-md-4">
-                            <a href="/userprofile/{{user.username}}"><img class="img-responsive host-featured-img" src="/uploads/{{user.profileimg}}" /></a>
+                            <a href="/userprofile/{{user.username}}"><img class="img-responsive" src="/uploads/{{user.profileimg}}" /></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>User Images:</h5>
+                            {{#if userDetails.image_ids}}
+                                <div>
+                                    {{#userDetails.image_ids}}
+                                        <img class="img-responsive user-images" src="/uploads/{{filename}}"/>
+                                    {{/userDetails.image_ids}}
+                                </div>
+                            {{else}}
+                                <div>This user has not yet uploaded any images.</div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
@@ -49,6 +63,14 @@
                             <input type="file" id="profileImgUpload" name="upl" />
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <strong>Add Images</strong>
+                    <form action="/addimages" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label for="profileImgUpload">Profile Picture:</label>
+                            <input type="file" id="userImagesUpload" name="userimages" multiple/>
+                            <button type="submit" class="btn btn-default">Submit Images</button>
+                        </div>
                     </form>
                 </div>
             </div>
