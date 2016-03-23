@@ -6,6 +6,12 @@ VOLUNTEERAPP = {
     common: {//Common code
         init: function() {
 
+            Dropzone.options.userimages = {
+                maxFileSize: 2,
+                maxFiles: 6,
+                acceptedFiles: 'image/*'
+            };
+
             tinymce.init({
                 selector: '#about'
             });

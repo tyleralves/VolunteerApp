@@ -26,15 +26,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h5>User Images:</h5>
-                            {{#if userDetails.image_ids}}
-                                <div>
+                            <div class="row">
+                                {{#if userDetails.image_ids}}
                                     {{#userDetails.image_ids}}
-                                        <img class="img-responsive user-images" src="/uploads/{{filename}}"/>
+                                        <div class="col-md-4">
+                                            <img class="img-responsive user-images" src="/uploads/{{filename}}"/>
+                                        </div>
                                     {{/userDetails.image_ids}}
-                                </div>
-                            {{else}}
-                                <div>This user has not yet uploaded any images.</div>
-                            {{/if}}
+                                {{else}}
+                                    <div class="col-md-12">This user has not yet uploaded any images.</div>
+                                {{/if}}
+                            </div>
+
                         </div>
                     </div>
                 </div>

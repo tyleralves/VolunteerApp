@@ -82,8 +82,8 @@ textarea{
     margin:0;
 }
 
-.nav li>a:hover, .nav li>a:active {
-    background: none;
+.nav li>a:hover, .nav li>a:active, .nav li>a:visited {
+    background: white;
 }
 
 .nav .active::after, .nav li:hover::after {
