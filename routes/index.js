@@ -42,7 +42,7 @@ router.get('/', function (req, res, next) {
             feedbackDocs = feedbackDocs.map(function (feedback) {
                 feedback.content = feedback.content.slice(0, 280);
                 if(feedback.content.length===280){
-                    feedback.content = feedback.content + '...';;
+                    feedback.content = feedback.content + '...';
                 }
                 return feedback;
             });
