@@ -17,7 +17,7 @@
                         <div class="col-md-8">
                             <h4>{{user.displayname}}</h4>
                             <h5>Description:</h5>
-                            <span><pre class="preUserInput">{{{user.description}}}</pre></span>
+                            <pre class="preUserInput">{{{user.description}}}</pre>
                         </div>
                         <div class="col-md-4">
                             <a href="/userprofile/{{user.username}}"><img class="img-responsive" src="/uploads/{{user.profileimg}}" /></a>
@@ -31,6 +31,7 @@
                                     {{#userDetails.image_ids}}
                                         <div class="col-md-4">
                                             <img class="img-responsive user-images" src="/uploads/{{filename}}"/>
+                                            <button class="user-image-remove" data-imageindex="{{@index}}" data-imageid="{{_id}}">{{@index}}</button>
                                         </div>
                                     {{/userDetails.image_ids}}
                                 {{else}}

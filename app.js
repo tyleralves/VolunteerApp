@@ -1,4 +1,5 @@
 var express = require('express');
+var dotenv = require('dotenv').config();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
-var mongo = require('mongodb');
 var dbConfig = require('./db.js');
 var mongoose = require('mongoose');
 mongoose.connect(dbConfig.url);

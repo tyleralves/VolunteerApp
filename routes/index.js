@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 var passport = require('passport');
 var path = require('path');
 var User = require('../models/user');
@@ -30,17 +31,18 @@ hbsHelpers.registerAllHelpers();                       //Registering all hbs hel
 router.get('/', function (req, res, next) {
     //Fetching data to populate newest listings collage
     User.find({role: 'organization'}).sort({datecreated: -1}).limit(6).exec(function (err, orgsDocs) {
+        
         orgsDocs = orgsDocs.map(function (item) {
-            item.description = item.description.slice(0, 280);
+            item.description = item.description.length<280?item.description: item.description.slice(0, 280);
             if(item.description.length===280){
-                item.description = item.description + '...';;
+                item.description = item.description + '...';
             }
             return item;
         });
         console.log(orgsDocs);
         Feedback.find({}).sort({datecreated: -1}).limit(3).populate('recipient_id','username displayname').exec(function (err, feedbackDocs) {
             feedbackDocs = feedbackDocs.map(function (feedback) {
-                feedback.content = feedback.content.slice(0, 280);
+                feedback.content = feedback.content.length<280?feedback.content:feedback.content.slice(0, 280);
                 if(feedback.content.length===280){
                     feedback.content = feedback.content + '...';
                 }
@@ -100,7 +102,6 @@ router.get('/userprofile/:username', function (req, res, next) {
         .exec(function (err, docs) {
 
             Feedback.populate(docs, {path: 'feedbackreceived_ids.sender_id', select: 'username displayname profileimg', model: 'User'}, function (err, updatedDocs) {
-                //console.log("====================" + JSON.stringify(updatedDocs.feedbackreceived_ids[0].sender_id));
                 res.render('userprofile.hbs', {
                     user: req.user,
                     userDetails: updatedDocs,
@@ -160,9 +161,6 @@ router.get('/signout', function (req, res, next) {
     res.redirect('/');
 });
 
-//Routing for new user registration page is shared with register.hbs (routed above)
-//
-
 //Dashboard
 router.get('/dashboard', isAuthenticated, function (req, res, next) {
     User.findById(req.user.id)
@@ -196,6 +194,23 @@ router.post('/addimages',
                 });
             });
     });
+
+
+//NEED TO FIX
+router.post('/removeimage', function(req, res, next){
+    Image.findOne({_id:req.body.imageId})
+        .exec(function(err, response){
+            User.findOne({_id:req.user._id}, function(err, user){
+                console.log("Body id: "+req.body.imageId+" response id: "+response._id+" req.body.imageIndex: " + req.body.imageIndex);
+                var imageIndex = user.image_ids.indexOf(req.body.imageId);
+                user.image_ids.splice(imageIndex,1);
+                user.save();
+                fs.unlink(response.destination + response.filename);
+                response.remove();
+                res.end();
+          });
+    });
+});
 
 router.post('/updateuser',
     upload.single('upl'),  //IMPORTANT: Need to implement magic bytes test to ensure file uploads are kosher
@@ -300,24 +315,5 @@ router.route('/feedback')
         res.redirect('/userprofile/' + req.body.feedbackuser/* + '&originatingTitle=' + req.body.originatingTitle*/);
     });
 
-//Jobs============================================================================================================
-/*Routing for new job page
- router.post('/addJob', function (req, res, next) {
- res.render('newjob.hbs', {
-
- });
- });
- */
-
-//Routing for joblist.hbs
-router.get('/joblist', function (req, res, next) {
-    var db = req.db;
-    var collection = db.get('jobcollection');
-    collection.find({}, {}, function (e, docs) {
-        res.render('joblist.hbs', {
-            user: req.user, "joblist": docs, message: req.flash('message')
-        });
-    });
-});
 
 module.exports = router;

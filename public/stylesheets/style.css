@@ -299,7 +299,10 @@ textarea{
 
 .customCaption>a{
     color: white;
+}
 
+.customCaption>pre{
+  color: white;
 }
 
 .item-dim:hover .customCaption {
@@ -311,7 +314,7 @@ textarea{
     text-decoration: none;
 }
 
-.item-dim:hover .customCaption>p, .item-dim:hover .customCaption>.btn {
+.item-dim:hover .customCaption>pre, .item-dim:hover .customCaption>.btn {
     display: inline-block;
 }
 
@@ -421,6 +424,11 @@ div{
     height: 300px;
     width: 300px;
     display: inline-block;
+    margin-bottom:30px;
+}
+
+.user-image-remove {
+  position: absolute;
 }
 
 /*==============================Orglist page================================================================*/

@@ -204,6 +204,24 @@ VOLUNTEERAPP = {
             //dashboard user nonspecific code
             //Activate nav item
             $('#navItemDashboard').addClass('active');
+
+            //Delete image in images collection
+
+            $('.user-image-remove').on('click', function(){
+                var that = $(this);
+                var imageId = that.data('imageid');
+                var imageIndex = that.data('imageindex');
+                console.log(imageIndex);
+                $.ajax({
+                    type: 'POST',
+                    url: '/removeimage',
+                    data: {imageId: imageId, imageIndex: imageIndex},
+                    success: function(response){
+                        that.parent().remove();
+                    }
+                });
+            });
+            
         },
         volunteer: function(){
             //dashboard user(volunteer) specific code
