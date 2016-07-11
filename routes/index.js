@@ -195,8 +195,6 @@ router.post('/addimages',
             });
     });
 
-
-//NEED TO FIX
 router.post('/removeimage', function(req, res, next){
     Image.findOne({_id:req.body.imageId})
         .exec(function(err, response){
@@ -288,7 +286,7 @@ router.route('/feedback')
             if(err){
                 console.log("error!!");
             }
-
+            console.log(req.query.id);
             res.render('feedback.hbs', {
                 user: req.user, query: req.query, receivingUser:docs
             });

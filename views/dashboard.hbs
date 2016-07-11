@@ -31,7 +31,7 @@
                                     {{#userDetails.image_ids}}
                                         <div class="col-md-4">
                                             <img class="img-responsive user-images" src="/uploads/{{filename}}"/>
-                                            <button class="user-image-remove" data-imageindex="{{@index}}" data-imageid="{{_id}}">{{@index}}</button>
+                                            <button class="user-image-remove" data-imageindex="{{@index}}" data-imageid="{{_id}}"><b>X</b></button>
                                         </div>
                                     {{/userDetails.image_ids}}
                                 {{else}}
@@ -75,30 +75,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 orgDiv">
-            <div class="panel panel-default nomargin-panel">
-                <div class="activateDiv panel-heading">
-                    <h4>Add a New Volunteer Opportunity</h4>
-                </div>
-                <div class="panel-body initialHidden">
-                    <form action="/addjob" method="post" id="addJobForm">
-                        <div class="form-group">
-                            <label for="inputOrganization">Organization: </label><br />
-                            <input type="text" class="form-control" id="inputOrganization" name="joborganization" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputTitle">Job Title: </label><br />
-                            <input type="text" class="form-control" id="inputTitle" name="jobtitle" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputDescription">Please provide a brief description of the volunteer opportunity: </label>
-                            <textarea id="inputDescription" class="form-control" name="jobdescription"></textarea>
-                        </div>
 
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

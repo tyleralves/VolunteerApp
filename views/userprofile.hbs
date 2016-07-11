@@ -15,16 +15,13 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h4>Description:</h4>
-                            <span><pre class="preUserInput">{{userDetails.description}}</pre></span>
+                            <span><pre class="preUserInput">{{{userDetails.description}}}</pre></span>
                         </div>
                         <div class="col-md-4">
                             <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive" src="/uploads/{{userDetails.profileimg}}" /></a>
                             <div class="row">
-                                <div class="col-md-6 profileBtn">
-                                    <a href="/messages?username={{userDetails.username}}"><div class="btn btn-default orgDiv volDiv">Send Message</div></a>
-                                </div>
-                                <div class="col-md-6 profileBtn">
-                                    <a href="/feedback?id={{userDetails._id}}"><div class="btn btn-success orgDiv volDiv">Leave Feedback</div></a>
+                                <div class="col-md-12">
+                                    <a href="/messages?username={{userDetails.username}}"><div class="btn btn-success orgDiv volDiv">Send Message</div></a>
                                 </div>
                             </div>
                         </div>
@@ -47,23 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading activateDiv">
-                    <h4>Location</h4>
-                </div>
-                <div class="panel-body initialHidden">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Map:</h4>
-                            <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive host-featured-img" style="height:400px width:600px" src="/uploads/{{userDetails.profileimg}}" /></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
