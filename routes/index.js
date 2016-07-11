@@ -39,8 +39,11 @@ router.get('/', function (req, res, next) {
             }
             return item;
         });
-        console.log(orgsDocs);
-        Feedback.find({}).sort({datecreated: -1}).limit(3).populate('recipient_id','username displayname').exec(function (err, feedbackDocs) {
+        Feedback
+          .find({})
+          .sort({datecreated: -1})
+          .limit(3).populate('recipient_id','username displayname')
+          .exec(function (err, feedbackDocs) {
             feedbackDocs = feedbackDocs.map(function (feedback) {
                 feedback.content = feedback.content.length<280?feedback.content:feedback.content.slice(0, 280);
                 if(feedback.content.length===280){
@@ -176,7 +179,6 @@ router.get('/dashboard', isAuthenticated, function (req, res, next) {
 router.post('/addimages',
     upload.array('file',12),
     function(req, res, next){
-        console.log("================" + JSON.stringify(req.files));
         var imageArray = req.files;
         imageArray = imageArray.map(function(currentValue,index,array){
             currentValue._id = mongoose.Types.ObjectId();
@@ -199,7 +201,6 @@ router.post('/removeimage', function(req, res, next){
     Image.findOne({_id:req.body.imageId})
         .exec(function(err, response){
             User.findOne({_id:req.user._id}, function(err, user){
-                console.log("Body id: "+req.body.imageId+" response id: "+response._id+" req.body.imageIndex: " + req.body.imageIndex);
                 var imageIndex = user.image_ids.indexOf(req.body.imageId);
                 user.image_ids.splice(imageIndex,1);
                 user.save();
@@ -270,7 +271,6 @@ router.route('/messages')
         }
 
         Message.create(newMessage);
-        console.log("======================" + req.body.messageUser);
         User.update({$or:[{'username': req.body.messageUser},{_id:req.user._id}]}, {$push:{message_ids: newMessage._id}}, {upsert:true, multi:true}, function(err,docs){});
 
         next();
@@ -281,17 +281,6 @@ router.route('/messages')
 
 //Feedback
 router.route('/feedback')
-    .get(isAuthenticated, function(req,res,next){    //Note: feedback.hbs relies on 'replyUser' and 'messages' handlebars helpers defined at the top of index.js
-        User.findOne({_id:req.query.id}, function(err,docs){
-            if(err){
-                console.log("error!!");
-            }
-            console.log(req.query.id);
-            res.render('feedback.hbs', {
-                user: req.user, query: req.query, receivingUser:docs
-            });
-        });
-    })
     .post(function(req,res,next){
         var newFeedback = {
             _id: mongoose.Types.ObjectId(),
@@ -303,10 +292,8 @@ router.route('/feedback')
 
         Feedback.create(newFeedback);
         User.findByIdAndUpdate(req.user._id, {$push:{feedbacksent_ids: newFeedback._id}},{upsert:true}, function(err,docs){
-            console.log("=================", docs);
         });
         User.findByIdAndUpdate(req.body.feedbackid, {$push:{feedbackreceived_ids: newFeedback._id}},{upsert:true}, function(err,docs){
-            console.log("=================", newFeedback._id);
         });
         next();
     }, function(req,res,next){
