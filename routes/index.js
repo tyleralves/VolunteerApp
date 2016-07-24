@@ -51,7 +51,8 @@ router.get('/', function (req, res, next) {
                 }
                 return feedback;
             });
-            res.render('index.hbs', {user: req.user, orgsfeatured: orgsDocs, feedbackfeatured: feedbackDocs, message: req.flash('message'),auth: req.flash('auth')});
+            res.render('index.hbs',
+              {user: req.user, orgsfeatured: orgsDocs, feedbackfeatured: feedbackDocs, message: req.flash('message'),auth: req.flash('auth')});
         });
     });
 
