@@ -10,6 +10,7 @@
     "npm": "2.14.7"
   },
   "dependencies": {
+    "aws-sdk": "^2.5.4",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.3.3",
     "body-parser": "~1.13.2",

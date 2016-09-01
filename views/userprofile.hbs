@@ -18,7 +18,7 @@
                             <span><pre class="preUserInput">{{{userDetails.description}}}</pre></span>
                         </div>
                         <div class="col-md-4">
-                            <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive" src="/uploads/{{userDetails.profileimg}}" /></a>
+                            <a href="/userprofile/{{userDetails.username}}"><img class="img-responsive" src="{{userDetails.profileimg}}" /></a>
                             <div class="row">
                                 <div class="col-md-12">
                                     <a href="/messages?username={{userDetails.username}}"><div class="btn btn-success orgDiv volDiv">Send Message</div></a>
@@ -73,7 +73,7 @@
                             </form>
                         </div>
                         <div class="col-md-4">
-                            <img class="img-responsive user-featured-image" src="/uploads/{{user.profileimg}}" />
+                            <img class="img-responsive user-featured-image" src="{{user.profileimg}}" />
                         </div>
                     </div>
 
@@ -81,7 +81,7 @@
                     {{#userDetails.feedbackreceived_ids}}
                         <div class="row feedbackItem">
                             <div class="col-xs-2 feedbackImgCol">
-                                <a href="/userprofile/{{sender_id.username}}"><img class="img-responsive user-featured-image" src="/uploads/{{sender_id.profileimg}}" /></a>
+                                <a href="/userprofile/{{sender_id.username}}"><img class="img-responsive user-featured-image" src="{{sender_id.profileimg}}" /></a>
 
                             </div>
                             <div class="col-xs-10 feedbackContentCol">

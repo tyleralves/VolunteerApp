@@ -1,7 +1,7 @@
 Preview deployed app at:
 https://stormy-eyrie-32571.herokuapp.com/
 
-TODO:
+COMPLETE:
 Databases(2):
     1. Users
         a. Volunteers:
@@ -16,8 +16,7 @@ Databases(2):
     2. Messages
     3. Feedback
 
-
-NOW:
+Views:
     1. Index
         + Make description snippet more readable in newest organizations slider
         + Display feedback in slider

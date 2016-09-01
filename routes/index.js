@@ -12,6 +12,7 @@ var app = require('../app');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 Promise.promisifyAll(mongoose);
+var aws = require('aws-sdk');
 //var readChunk = require('read-chunk');                for magic bytes implementation
 //var fileType = require('file-type');                  for magic bytes implementation
 
@@ -33,7 +34,12 @@ router.get('/', function (req, res, next) {
     User.find({role: 'organization'}).sort({datecreated: -1}).limit(6).exec(function (err, orgsDocs) {
         
         orgsDocs = orgsDocs.map(function (item) {
-            item.description = item.description.length<280?item.description: item.description.slice(0, 280);
+            if(item.description){
+                item.description = item.description.length<280?item.description: item.description.slice(0, 280);
+            } else {
+                item.description = 'No Description Provided';
+            }
+
             if(item.description.length===280){
                 item.description = item.description + '...';
             }
@@ -170,15 +176,17 @@ router.get('/dashboard', isAuthenticated, function (req, res, next) {
     User.findById(req.user.id)
         .populate({path:'image_ids',options:{sort: {dateCreated:-1}}})
         .exec(function (e, docs) {             //Necessary? Just use req.user instead?
-        res.render('dashboard.hbs', {
-            user: req.user, userDetails: docs
+            docs.profileimg = docs.profileimg.length ? docs.profileimg : '/uploads/defaultuserimage.png';
+            console.log(docs.profileimg);
+            res.render('dashboard.hbs', {
+                user: req.user, userDetails: docs
+            });
         });
-    });
 });
 
 //Update user from within dashboard
 router.post('/addimages',
-    upload.array('file',12),
+    //upload.array('file',12),
     function(req, res, next){
         var imageArray = req.files;
         imageArray = imageArray.map(function(currentValue,index,array){
@@ -213,9 +221,10 @@ router.post('/removeimage', function(req, res, next){
 });
 
 router.post('/updateuser',
-    upload.single('upl'),  //IMPORTANT: Need to implement magic bytes test to ensure file uploads are kosher
+    //upload.single('upl'),  //IMPORTANT: Need to implement magic bytes test to ensure file uploads are safe
     function (req, res, next) {
-        var updatedImgPath = req.hasOwnProperty('file')?req.file.filename:req.user.profileimg;
+        var updatedImgPath = req.body.profileImgUrl ? req.body.profileImgUrl : req.user.profileimg;
+
         User.update({_id: req.user.id}, {
             $set: {
                 displayname: req.body.displayname,
@@ -301,5 +310,33 @@ router.route('/feedback')
         res.redirect('/userprofile/' + req.body.feedbackuser/* + '&originatingTitle=' + req.body.originatingTitle*/);
     });
 
+
+router.get('/sign-s3', function(req, res) {
+    var s3 = new aws.S3();
+    var fileName = req.query['file-name'];
+    var fileType = req.query['file-type'];
+    var s3Params = {
+        Bucket: process.env.S3_BUCKET || S3_BUCKET,
+        Key: fileName,
+        Expires: 60,
+        ContentType: fileType,
+        ACL: 'public-read'
+    };
+
+    s3.getSignedUrl('putObject', s3Params, function(err, data) {
+
+        if(err){
+            return res.end();
+        }
+
+        var returnData = {
+            signedRequest: data,
+            url: 'https://' + process.env.S3_BUCKET + '.s3.amazonaws.com/' + fileName
+        };
+
+        res.write(JSON.stringify(returnData));
+        res.end();
+    });
+});
 
 module.exports = router;
